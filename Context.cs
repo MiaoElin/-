@@ -5,24 +5,27 @@ public struct Context
 {
     public InputEntity input;
     public PlaneEntity plane;
-    public BulletEntity[] PlayerBullets;
-    public int playerBulsCount;
-    // 飞行敌人
-    public PlaneEntity[] flyEnemies;
-    public int flyEnemyCount;
-    public BulletEntity[] EnemyBullets;
-    public int EnemyBulletCount;
-    public float fEnemySqwanInterval;
-    public float fEnemySqwantimer;
+    // 敌人
+    public PlaneEntity[] Enemies;
+    public int EnemyCount;
+    public float fEnemySpawnInterval;
+    public float fEnemySpawntimer;
+    public float sEnemySpawnInterval;
+    public float sEnemySpawntimer;
     public float fEBulTimer;
     public float fEBulInterval;
-    // 固定敌人
-    public PlaneEntity[] stayEnemies;
-    public int stayEnemyCount;
-    public float sEnemySqwanInterval;
-    public float sEnemySqwantimer;
+    // 子弹
+    public BulletEntity[] Bullets;
+    public int BulletCount;
     public float sEBulTimer;
     public float sEBulInterval;
+    // 食物
+    public FoodEntity[] food;
+    public int foodCount;
+    public float hpFoodTimer;
+    public float hpFoodInterval;
+    public float bulFoodTimer;
+    public float bulFoodInterval;
 
     // 0：登入页 1：游戏中 2：结束页
     public byte gameStatus;
@@ -34,25 +37,30 @@ public struct Context
     public void Initialize()
     {
         input = new InputEntity();
-        plane = Factory.CreatePlane(new Vector2(400, 1200), Color.BLUE, 20, 300,100, 0);
-        PlayerBullets = new BulletEntity[20000];
-        playerBulsCount = 0;
+        plane = Factory.CreatePlane(new Vector2(400, 1200), Color.BLUE, 20, 300, 100, 0);
 
-        flyEnemies = new PlaneEntity[20000];
-        flyEnemyCount = 0;
-        EnemyBullets = new BulletEntity[2000000];
-        EnemyBulletCount = 0;
-        fEnemySqwantimer = 1f;
-        fEnemySqwanInterval = 4f;
+        Enemies = new PlaneEntity[20000];
+        EnemyCount = 0;
+        Bullets = new BulletEntity[2000000];
+        BulletCount = 0;
+        fEnemySpawntimer = 1f;
+        fEnemySpawnInterval = 4f;
 
-        stayEnemies = new PlaneEntity[20000];
-        stayEnemyCount = 0;
-        sEnemySqwantimer = 1f;
-        sEnemySqwanInterval = 8f;
-        fEBulInterval = 3f;
+        sEnemySpawntimer = 1f;
+        sEnemySpawnInterval = 8f;
+
+        fEBulInterval = 4f;
         fEBulTimer = 0.5f;
-        sEBulTimer=0.5f;
-        sEBulInterval=3f;
+
+        sEBulTimer = 0.5f;
+        sEBulInterval = 3f;
+
+        food = new FoodEntity[2000];
+        foodCount = 0;
+        hpFoodTimer =10f;
+        hpFoodInterval=10f;
+        bulFoodTimer=8f;
+        bulFoodInterval=8f;
 
 
         loginPanel.startBtn = new GUIButton(new(350, 500), new(100, 30), "START GAME", Color.BLACK, Color.WHITE);

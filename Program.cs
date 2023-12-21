@@ -80,6 +80,8 @@ public class Program
         BulletController.LogicTick(ref con,dt);
         // 敌人 行为
         EnemyController.LogicTick(ref con,dt);
+        // 食物 行为
+        FoodController.LogicTick(ref con,dt);
     }
     static void Game_Draw(ref Context con)
     {
@@ -89,6 +91,8 @@ public class Program
         BulletController.DrawAll(ref con);
         // 敌人 绘制
         EnemyController.DrawAll(ref con);
+        // 食物绘制
+        FoodController.Draw(ref con);
     }
     // 结束页
     static void Logout_Tick(ref Context con)

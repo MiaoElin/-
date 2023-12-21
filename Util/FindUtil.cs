@@ -33,18 +33,20 @@ public static class FindUtil
             var fly = Enemies[j];
             float flyBulDisance1 = Vector2.Distance(bullets.pos1, Enemies[j].pos);
             float flyBulDisance2 = Vector2.Distance(bullets.pos2, Enemies[j].pos);
+            float flyBulDisance3 =Vector2.Distance(bullets.pos2, Enemies[j].pos);
             float flyBulDisance = 0;
             if(Enemies[j].isDead){
                 continue;
             }
-            if (flyBulDisance1 < flyBulDisance2)
+            if (flyBulDisance1 <=flyBulDisance2&&flyBulDisance1<=flyBulDisance3)
             {
                 flyBulDisance = flyBulDisance1;
             }
-            else{
+            if(flyBulDisance2<=flyBulDisance1&&flyBulDisance2<=flyBulDisance3){
                 flyBulDisance = flyBulDisance2;
+            }if(flyBulDisance3<=flyBulDisance1&&flyBulDisance3<=flyBulDisance2){
+                flyBulDisance =flyBulDisance3;
             }
-
             if (flyBulDisance < nearDistance)
             {
                 nearDistance = flyBulDisance;

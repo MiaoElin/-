@@ -23,4 +23,13 @@ public static class IntersectUtil
             return false;
         }
     }
+    public static bool IsRectangleIntersect(Rectangle rect,PlaneEntity plane){
+        Vector2 leftTop = new Vector2(rect.X-plane.radius,rect.Y-plane.radius);
+        Vector2 rightBottom =new Vector2((rect.X+(int)rect.Width)+plane.radius ,rect.Y+(int)rect.Height+plane.radius);
+        if(plane.pos.X>=leftTop.X&&plane.pos.X<=rightBottom.X&&plane.pos.Y<=rightBottom.Y&&plane.pos.Y>=leftTop.Y){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

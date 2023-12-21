@@ -9,8 +9,7 @@ public struct PlaneEntity
     public int hp;
     public bool isDead;
     public int id;
-
-    
+    public sbyte bulletType; //2==2发子弹 3==3发子弹
 
     public void Move(Vector2 dir, float dt)
     {
