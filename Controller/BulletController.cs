@@ -23,12 +23,15 @@ public static class BulletController
                 Bullets[i].PlayerBulDraw1();
 
             }
+            if(bul.ally==2){
+                Bullets[i].PlayerBulDraw1();
+            }
             // 敌人子弹 绘制
-            if (bul.ally==2)
+            if (bul.ally==3)
             {
                 Bullets[i].FEnemyBulDraw();
             }
-            if (bul.ally==3)
+            if (bul.ally==4)
             {
                 Bullets[i].SEnemyBulDraw();
             }

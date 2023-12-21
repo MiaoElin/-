@@ -44,7 +44,7 @@ public static class Factory
         bullet.isDead = false;
         bullet.id = id;
         bullet.firstDir = firstDir;
-        bullet.ally = 1;
+        bullet.ally = 2;
         return bullet;
     }
     public static BulletEntity CreateFEnemyBullet(Vector2 enemyPos, int id, Vector2 firstDir)
@@ -59,7 +59,7 @@ public static class Factory
         bullet.isDead = false;
         bullet.id = id;
         bullet.firstDir = firstDir;
-        bullet.ally = 2;
+        bullet.ally = 3;
         return bullet;
     }
     public static BulletEntity CreateSEnemyBullet(Vector2 enemyPos, int id, Vector2 firstDir)
@@ -74,7 +74,7 @@ public static class Factory
         bullet.isDead = false;
         bullet.id = id;
         bullet.firstDir = firstDir;
-        bullet.ally =3;
+        bullet.ally =4;
         return bullet;
     }
     public static FoodEntity CreateFood(Rectangle rect,Color color, sbyte ally){

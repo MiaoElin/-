@@ -78,53 +78,50 @@ public static class BulletDomain
             ref var bul = ref Bullets[i];
             if (bul.ally == 1)
             {
-                if (plane.bulletType == 2)
-                {
-                    bul.PlayerBulMove2(dt);
-                    // 找子弹的最近敌人
-                    // 碰撞检测1.碰到子弹isDead =true；敌人hp-10；如果敌人hp<=0 则敌人isDead=true；
-                    //        2.没碰到不做任何动作；
-                    PlaneEntity nearlyEnemy = FindUtil.FindEnemy(bul, Enemies, EnemyCount, out float distance, out int index);
-                    // 最近存在敌人
-                    if (index != -1)
-                    {
-                        // 碰撞检测
-                        if (IntersectUtil.IsCircleIntersect(nearlyEnemy, bul))
-                        {
-                            bul.isDead = true;
-                            Enemies[index].hp -= 10;
-                            if (Enemies[index].hp == 0)
-                            {
-                                Enemies[index].isDead = true;
-                            }
-                        }
-                    }
-                }
-                if (plane.bulletType == 3)
-                {
-                    bul.PlayerBulMove3(dt);
-                    // 找子弹的最近敌人
-                    // 碰撞检测1.碰到子弹isDead =true；敌人hp-10；如果敌人hp<=0 则敌人isDead=true；
-                    //        2.没碰到不做任何动作；
-                    PlaneEntity nearlyEnemy = FindUtil.FindEnemy(bul, Enemies, EnemyCount, out float distance, out int index);
-                    // 最近存在敌人
-                    if (index != -1)
-                    {
-                        // 碰撞检测
-                        if (IntersectUtil.IsCircleIntersect(nearlyEnemy, bul))
-                        {
-                            bul.isDead = true;
-                            Enemies[index].hp -= 10;
-                            if (Enemies[index].hp == 0)
-                            {
-                                Enemies[index].isDead = true;
-                            }
-                        }
-                    }
-                }
 
+                bul.PlayerBulMove2(dt);
+                // 找子弹的最近敌人
+                // 碰撞检测1.碰到子弹isDead =true；敌人hp-10；如果敌人hp<=0 则敌人isDead=true；
+                //        2.没碰到不做任何动作；
+                PlaneEntity nearlyEnemy = FindUtil.FindEnemy(bul, Enemies, EnemyCount, out float distance, out int index);
+                // 最近存在敌人
+                if (index != -1)
+                {
+                    // 碰撞检测
+                    if (IntersectUtil.IsCircleIntersect(nearlyEnemy, bul))
+                    {
+                        bul.isDead = true;
+                        Enemies[index].hp -= 10;
+                        if (Enemies[index].hp == 0)
+                        {
+                            Enemies[index].isDead = true;
+                        }
+                    }
+                }
             }
             if (bul.ally == 2)
+            {
+                bul.PlayerBulMove3(dt);
+                // 找子弹的最近敌人
+                // 碰撞检测1.碰到子弹isDead =true；敌人hp-10；如果敌人hp<=0 则敌人isDead=true；
+                //        2.没碰到不做任何动作；
+                PlaneEntity nearlyEnemy = FindUtil.FindEnemy(bul, Enemies, EnemyCount, out float distance, out int index);
+                // 最近存在敌人
+                if (index != -1)
+                {
+                    // 碰撞检测
+                    if (IntersectUtil.IsCircleIntersect(nearlyEnemy, bul))
+                    {
+                        bul.isDead = true;
+                        Enemies[index].hp -= 10;
+                        if (Enemies[index].hp == 0)
+                        {
+                            Enemies[index].isDead = true;
+                        }
+                    }
+                }
+            }
+            if (bul.ally == 3)
             {
                 // 飞行敌人 子弹移动
                 // 从上垂直向下
@@ -137,13 +134,12 @@ public static class BulletDomain
                     plane.bulletType=2;
                     if (plane.hp <= 0)
                     {
-                        Console.WriteLine(plane.hp);
                         plane.isDead = true;
                     }
                 }
             }
             // 固定敌人 子弹移动
-            if (bul.ally == 3)
+            if (bul.ally == 4)
             {
                 bul.SEnemyBulMove(bul.firstDir, dt);
                 if (IntersectUtil.IsCircleIntersect(plane, bul))

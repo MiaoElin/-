@@ -12,7 +12,7 @@ public struct BulletEntity
     public bool isDead;
     public int id;
     public Vector2 firstDir;
-    public sbyte ally;
+    public sbyte ally; //1=w玩家2子弹模式  2==玩家三子弹模式 3==飞行敌人子弹 4==固定敌人子弹
 
     // ===移动===
     public void PlayerBulMove2(float dt)
@@ -20,6 +20,7 @@ public struct BulletEntity
         Vector2 dir = new Vector2(0, -1);
         pos1 += Raymath.Vector2Normalize(dir) * moveSpeed * dt;
         pos2 += Raymath.Vector2Normalize(dir) * moveSpeed * dt;
+        
     }
     public void PlayerBulMove3(float dt)
     {
