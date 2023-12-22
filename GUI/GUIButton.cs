@@ -38,17 +38,17 @@ public struct GUIButton
             return false;
         }
     }
-    public void Draw()
+    public void Draw(float scale)
     {
         if (isMouseHover)
         {
             Raylib.DrawRectangleRec(rect, Color.GREEN);
-            Raylib.DrawText(text, (int)rect.X + 18, (int)rect.Y + 8, 8, fontC);
+            Raylib.DrawText(text, (int)rect.X +(int)scale*12/6, (int)rect.Y + (int)scale*8/6,(int)scale*12/6, fontC);
         }
         else
         {
             Raylib.DrawRectangleRec(rect, bgC);
-            Raylib.DrawText(text, (int)rect.X + 20, (int)rect.Y + 8, 8, fontC);
+            Raylib.DrawText(text, (int)(rect.X +scale*12/6), (int)(rect.Y +scale*8/6),(int)scale*12/6, fontC);
         }
     }
 

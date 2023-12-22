@@ -3,9 +3,9 @@ using Raylib_cs;
 
 public static class EnemyController
 {
-    public static void LogicTick(ref Context con, float dt)
+    public static void LogicTick(ref Context con, float dt,float scale)
     {
-        EnemyDomain.Spawn(ref con,dt);
+        EnemyDomain.Spawn(ref con,dt,scale);
         EnemyDomain.Move(ref con,dt);
         EnemyDomain.Remove(ref con);
     }

@@ -15,17 +15,26 @@ public static class PlayerController
 
     }
 
-    public static void DrawAll(ref Context con)
+    public static void DrawAll(ref Context con, float scale)
     {
         ref PlaneEntity plane = ref con.plane;
+        ref AssetsHelper asset = ref con.asset;
         if (!plane.isDead)
         {
-            Raylib.DrawCircleV(plane.pos, plane.radius, plane.color);
-            int planeHpInScreen = plane.hp*2;
-            string text =plane.hp.ToString();
-            con.guiHP.Draw(text, planeHpInScreen);
-        }else{
-            con.gameStatus=2;
+            // 画飞机
+            Rectangle src = new Rectangle(0, 0, scale*32/6, scale*32/6);
+            Rectangle dest = new Rectangle(plane.pos.X, plane.pos.Y, 60,60);
+            Vector2 center = new Vector2(60/2,60/2);
+            Raylib.DrawTexturePro(asset.player, src, dest, center, 0, Color.WHITE);
+
+            //画guiHP
+            int planeHpInScreen = plane.hp * 2;
+            string text = "100/" + plane.hp.ToString();
+            con.guiHP.Draw(text, planeHpInScreen, scale);
+        }
+        else
+        {
+            con.gameStatus = 2;
         }
 
 

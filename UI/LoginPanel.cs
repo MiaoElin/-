@@ -12,7 +12,6 @@ public struct LoginPanel
     {
         if (startBtn.IsBtnDown(mouPos, isMousePressed))
         {
-            Console.WriteLine("kkkk");
             return true;
         }
         else
@@ -24,7 +23,6 @@ public struct LoginPanel
     {
         if (exitBtn.IsBtnDown(mouPos, isMousePressed))
         {  
-            Console.WriteLine("llll");
             return true;
         }
         else
@@ -33,10 +31,10 @@ public struct LoginPanel
         }
 
     }
-    public void Draw(){
+    public void Draw(float scale){
         ver = "V1.0";
-        startBtn.Draw();
-        exitBtn.Draw();
+        startBtn.Draw(scale);
+        exitBtn.Draw(scale);
         Raylib.DrawText(ver,10,10,12,Color.WHITE);
 
     }

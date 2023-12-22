@@ -3,7 +3,8 @@ using Raylib_cs;
 
 public static class BulletDomain
 {
-    public static void Spawn(ref Context con, float dt)
+    enum Ally { none, playerTwoBul, playerThreeBulles,fEnemyBul,sEnemyBul}
+    public static void Spawn(ref Context con, float dt, float scale)
     {
 
         ref BulletEntity[] Bullets = ref con.Bullets;
@@ -16,20 +17,28 @@ public static class BulletDomain
 
         // =====生成======
         // 我机子弹 生成
-        if (input.isSpacePressed)
+        ref float planeBultimer = ref con.planeBultimer;
+        ref float planeBulInterval = ref con.planeBulInterval;
+        planeBultimer -= dt;
+        if (planeBultimer <= 0)
         {
-            if (plane.bulletType == 2)
+            if (input.isSpacePressed)
             {
-                BulletEntity newBullet = Factory.CreatePlayerBullet2(plane.pos, BulletCount, new(0, -1));
-                Bullets[BulletCount] = newBullet;
+                planeBultimer = planeBulInterval;
+                if (plane.bulletType == (int)Ally.playerTwoBul)
+                {
+                    BulletEntity newBullet = Factory.CreatePlayerBullet2(plane.pos, BulletCount, new(0, -1), scale);
+                    Bullets[BulletCount] = newBullet;
+                }
+                if (plane.bulletType ==(int)Ally.playerThreeBulles)
+                {
+                    BulletEntity newBullet = Factory.CreatePlayerBullet3(plane.pos, BulletCount, new(0, -1), scale);
+                    Bullets[BulletCount] = newBullet;
+                }
+                BulletCount++;
+                input.isSpacePressed = false;
+
             }
-            if (plane.bulletType == 3)
-            {
-                BulletEntity newBullet = Factory.CreatePlayerBullet3(plane.pos, BulletCount, new(0, -1));
-                Bullets[BulletCount] = newBullet;
-            }
-            BulletCount++;
-            input.isSpacePressed = false;
         }
         // 每个飞行敌人每2s秒生成一颗子弹
         ref float fEBultimer = ref con.fEBulTimer;
@@ -41,7 +50,7 @@ public static class BulletDomain
             {
                 fEBultimer = fEBulInterval;
                 var enemy = Enemies[i];
-                BulletEntity newBullet = Factory.CreateFEnemyBullet(enemy.pos, i, new(0, 1));
+                BulletEntity newBullet = Factory.CreateFEnemyBullet(enemy.pos, i, new(0, 1), scale);
                 Bullets[BulletCount] = newBullet;
                 BulletCount++;
             }
@@ -57,7 +66,7 @@ public static class BulletDomain
                 sEBulTimer = sEBulInterval;
                 var enemy = Enemies[i];
                 Vector2 firstDir = plane.pos - enemy.pos;
-                BulletEntity newBullet = Factory.CreateSEnemyBullet(enemy.pos, i, firstDir);
+                BulletEntity newBullet = Factory.CreateSEnemyBullet(enemy.pos, i, firstDir, scale);
                 Bullets[BulletCount] = newBullet;
                 BulletCount++;
             }
@@ -76,7 +85,7 @@ public static class BulletDomain
         for (int i = 0; i < BulletCount; i++)
         {
             ref var bul = ref Bullets[i];
-            if (bul.ally == 1)
+            if (bul.ally ==(int)Ally.playerTwoBul)
             {
 
                 bul.PlayerBulMove2(dt);
@@ -99,7 +108,7 @@ public static class BulletDomain
                     }
                 }
             }
-            if (bul.ally == 2)
+            if (bul.ally ==(int)Ally.playerThreeBulles)
             {
                 bul.PlayerBulMove3(dt);
                 // 找子弹的最近敌人
@@ -121,7 +130,7 @@ public static class BulletDomain
                     }
                 }
             }
-            if (bul.ally == 3)
+            if (bul.ally == (int)Ally.fEnemyBul)
             {
                 // 飞行敌人 子弹移动
                 // 从上垂直向下
@@ -131,22 +140,23 @@ public static class BulletDomain
                 {
                     bul.isDead = true;
                     plane.hp -= 10;
-                    plane.bulletType=2;
+                    plane.bulletType = 1;
                     if (plane.hp <= 0)
                     {
                         plane.isDead = true;
                     }
                 }
             }
+
             // 固定敌人 子弹移动
-            if (bul.ally == 4)
+            if (bul.ally ==(int)Ally.sEnemyBul)
             {
                 bul.SEnemyBulMove(bul.firstDir, dt);
                 if (IntersectUtil.IsCircleIntersect(plane, bul))
                 {
                     bul.isDead = true;
                     plane.hp -= 10;
-                    plane.bulletType=2;
+                    plane.bulletType = 1;
                     if (plane.hp <= 0)
                     {
                         plane.isDead = true;

@@ -3,7 +3,7 @@ using Raylib_cs;
 
 public static class EnemyDomain
 {
-    public static void Spawn(ref Context con, float dt)
+    public static void Spawn(ref Context con, float dt,float scale)
     {
 
         ref PlaneEntity plane = ref con.plane;
@@ -17,7 +17,7 @@ public static class EnemyDomain
         if (fEnemySqwantimer <= 0)
         {
             fEnemySqwantimer = fEnemySqwanInterval;
-            PlaneEntity newFlyEnemy = Factory.CreatePlane(RandomHelper.GetRandomPosOnTop(), Color.GRAY, 20, 60, 20, EnemyCount);
+            PlaneEntity newFlyEnemy = Factory.CreatePlane(RandomHelper.GetRandomPosOnTop(scale), Color.GRAY, scale*20/6, 60, 20, EnemyCount);
             Enemies[EnemyCount] = newFlyEnemy;
             EnemyCount++;
         }
@@ -29,10 +29,11 @@ public static class EnemyDomain
         if (sEnemySqwantimer <= 0)
         {
             sEnemySqwantimer = sEnemySqwanInterval;
-            PlaneEntity newStayEnemy = Factory.CreatePlane(RandomHelper.GetRandomPosOn_HalfTop(), Color.DARKGREEN, 30, 0, 20, EnemyCount);
+            PlaneEntity newStayEnemy = Factory.CreatePlane(RandomHelper.GetRandomPosOn_HalfTop(scale), Color.DARKGREEN, scale*30/6, 0, 20, EnemyCount);
             Enemies[EnemyCount] = newStayEnemy;
             EnemyCount++;
         }
+        // 
     }
     public static void Move(ref Context con, float dt)
     {

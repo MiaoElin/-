@@ -20,11 +20,11 @@ public struct GUIHP
         this.rectHp = new Rectangle(posBg.X, posBg.Y, planeHp*2, bgSize.Y);
         this.text = "100/100";
     }
-    public void Draw(string txt, int planeHpInScreen)
+    public void Draw(string txt, int planeHpInScreen,float scale)
     {   
         Raylib.DrawRectangleRec(rectBg, bgC);
         Raylib.DrawRectangle((int)rectHp.X,(int)rectHp.Y, planeHpInScreen,(int)rectHp.Height, hpC);
-        Raylib.DrawText(txt,(int)rectBg.X+80,(int)rectBg.Y+8,15,Color.BLACK);
+        Raylib.DrawText(txt,(int)rectBg.X+(int)scale*73/6,(int)rectBg.Y+(int)scale*8/6,(int)scale*20/6,Color.BLACK);
     }
 
 }

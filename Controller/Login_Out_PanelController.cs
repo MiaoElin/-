@@ -14,16 +14,16 @@ public static class Login_Out_PanelController
             Raylib.CloseWindow();
         }
     }
-    public static void LoginDraw(ref Context con)
+    public static void LoginDraw(ref Context con,float scale)
     {
-        con.loginPanel.Draw();
+        con.loginPanel.Draw(scale);
     }
-    public static void LogoutTick(ref Context con)
+    public static void LogoutTick(ref Context con,float scale)
     {
         ref InputEntity input = ref con.input;
         if (con.logoutPanel.IsStaBtnDown(input.mousePos, input.isMousePressed))
         {   
-            con.Initialize();
+            con.Initialize(scale);
             con.gameStatus = 1;
         }
         if (con.logoutPanel.IsExitBtnDown(input.mousePos, input.isMousePressed))
@@ -31,8 +31,8 @@ public static class Login_Out_PanelController
             Raylib.CloseWindow();
         }
     }
-    public static void LogoutDraw(ref Context con)
+    public static void LogoutDraw(ref Context con,float scale)
     {
-        con.logoutPanel.Draw();
+        con.logoutPanel.Draw(scale);
     }
 }

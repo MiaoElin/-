@@ -4,12 +4,15 @@ public class Program
 {
     public static void Main()
     {
-        Raylib.InitWindow(800, 1200, "PLANE GAME");
+        float scale = 6;
+        Raylib.InitWindow((int)scale * 120, (int)scale * 180, "PLANE GAME");
         Raylib.SetTargetFPS(60);
 
         // 初始化
         Context con = new Context();
-        con.Initialize();
+        con.Initialize(scale);
+        // 从文件加载图片
+        // Texture2D plane = Raylib.LoadTexture("Assets/plane.png");
 
         // 循环体 游戏界面
         while (!Raylib.WindowShouldClose())
@@ -25,41 +28,47 @@ public class Program
             if (con.gameStatus == 0)
             {
                 Raylib.ClearBackground(Color.GRAY);
+                // 
+
                 Login_Tick(ref con);
             }
             // 游戏中
             if (con.gameStatus == 1)
             {
                 Raylib.ClearBackground(Color.LIGHTGRAY);
-                Game_Tick(ref con, dt);
+                // Vector2 planePos = new Vector2(55 * scale, 175 * scale);
+                // Raylib.DrawTexture(player, (int)(scale*planePos.X/6), (int)(scale*planePos.Y/6), Color.WHITE);
+                
+                Game_Tick(ref con, dt, scale);
             }
             // 结束页
             if (con.gameStatus == 2)
-            {   
+            {
                 Raylib.ClearBackground(Color.GRAY);
-                Logout_Tick(ref con);
+                Logout_Tick(ref con, scale);
             }
 
             // ===绘制===
             // 登入页
             if (con.gameStatus == 0)
             {
-                Login_Draw(ref con);
+                Login_Draw(ref con, scale);
             }
             // 游戏中
             if (con.gameStatus == 1)
             {
-                Game_Draw(ref con);
+                Game_Draw(ref con, scale);
             }
             // 结束页
             if (con.gameStatus == 2)
             {
-                Logout_Draw(ref con);
+                Logout_Draw(ref con, scale);
             }
-
             Raylib.EndDrawing();
         }
         Raylib.CloseWindow();
+        con.asset.UnloadTexture();
+
 
     }
     // 登入页
@@ -67,41 +76,41 @@ public class Program
     {
         Login_Out_PanelController.LoginTick(ref con);
     }
-    static void Login_Draw(ref Context con)
+    static void Login_Draw(ref Context con, float scale)
     {
-        Login_Out_PanelController.LoginDraw(ref con);
+        Login_Out_PanelController.LoginDraw(ref con, scale);
     }
     // 游戏中
-    static void Game_Tick(ref Context con, float dt)
+    static void Game_Tick(ref Context con, float dt, float scale)
     {
         // 我机 行为
         PlayerController.LogicTick(ref con, dt);
         // 子弹 行为
-        BulletController.LogicTick(ref con,dt);
+        BulletController.LogicTick(ref con, dt, scale);
         // 敌人 行为
-        EnemyController.LogicTick(ref con,dt);
+        EnemyController.LogicTick(ref con, dt, scale);
         // 食物 行为
-        FoodController.LogicTick(ref con,dt);
+        FoodController.LogicTick(ref con, dt, scale);
     }
-    static void Game_Draw(ref Context con)
+    static void Game_Draw(ref Context con, float scale)
     {
         // 我机 绘制
-        PlayerController.DrawAll(ref con);
+        PlayerController.DrawAll(ref con, scale);
         // 子弹 绘制
-        BulletController.DrawAll(ref con);
+        BulletController.DrawAll(ref con,scale);
         // 敌人 绘制
         EnemyController.DrawAll(ref con);
         // 食物绘制
         FoodController.Draw(ref con);
     }
     // 结束页
-    static void Logout_Tick(ref Context con)
+    static void Logout_Tick(ref Context con, float scale)
     {
-        Login_Out_PanelController.LogoutTick(ref con);
+        Login_Out_PanelController.LogoutTick(ref con, scale);
     }
-    static void Logout_Draw(ref Context con)
+    static void Logout_Draw(ref Context con, float scale)
     {
-        Login_Out_PanelController.LogoutDraw(ref con);
+        Login_Out_PanelController.LogoutDraw(ref con, scale);
 
     }
 }

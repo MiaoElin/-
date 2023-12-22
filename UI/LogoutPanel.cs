@@ -30,11 +30,11 @@ public struct LogoutPanel
         }
 
     }
-    public void Draw()
+    public void Draw(float scale)
     {
         ver = "V1.0";
-        reStaBtn.Draw();
-        exitBtn.Draw();
+        reStaBtn.Draw(scale);
+        exitBtn.Draw(scale);
         Raylib.DrawText(ver, 10, 10, 12, Color.WHITE);
 
     }

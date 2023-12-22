@@ -33,7 +33,7 @@ public struct InputEntity
 
         isMousePressed = Raylib.IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_LEFT);
         mousePos = Raylib.GetMousePosition();
-        isSpacePressed = Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE);
+        isSpacePressed = Raylib.IsKeyDown(KeyboardKey.KEY_SPACE);
     }
 
 }
