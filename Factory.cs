@@ -3,7 +3,7 @@ using Raylib_cs;
 
 public static class Factory
 {
-    public static PlaneEntity CreatePlane(Vector2 pos, Color color, float radius, float moveSpeed, int hp, int id)
+    public static PlaneEntity CreatePlane(int bulType, Vector2 pos, Color color, float radius, float moveSpeed, int hp, int id)
     {
         PlaneEntity plane;
         plane.color = color;
@@ -13,7 +13,7 @@ public static class Factory
         plane.hp = hp;
         plane.isDead = false;
         plane.id = id;
-        plane.bulletType=1;
+        plane.bulType=bulType;
         return plane;
     }
 
@@ -29,7 +29,7 @@ public static class Factory
         bullet.isDead = false;
         bullet.id = id;
         bullet.firstDir = firstDir;
-        bullet.ally = 1;
+        bullet.typeID = 1;
         return bullet;
     }
         public static BulletEntity CreatePlayerBullet3(Vector2 planePos, int id, Vector2 firstDir,float scale)
@@ -44,7 +44,7 @@ public static class Factory
         bullet.isDead = false;
         bullet.id = id;
         bullet.firstDir = firstDir;
-        bullet.ally = 2;
+        bullet.typeID = 2;
         return bullet;
     }
     public static BulletEntity CreateFEnemyBullet(Vector2 enemyPos, int id, Vector2 firstDir,float scale)
@@ -59,7 +59,7 @@ public static class Factory
         bullet.isDead = false;
         bullet.id = id;
         bullet.firstDir = firstDir;
-        bullet.ally = 3;
+        bullet.typeID = 3;
         return bullet;
     }
     public static BulletEntity CreateSEnemyBullet(Vector2 enemyPos, int id, Vector2 firstDir,float scale)
@@ -74,7 +74,7 @@ public static class Factory
         bullet.isDead = false;
         bullet.id = id;
         bullet.firstDir = firstDir;
-        bullet.ally =4;
+        bullet.typeID =4;
         return bullet;
     }
     public static FoodEntity CreateFood(Rectangle rect,Color color, sbyte ally){
@@ -85,5 +85,4 @@ public static class Factory
         food.ally=ally;
         return  food;
     }
-
-}
+}        

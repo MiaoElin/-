@@ -25,12 +25,12 @@ public static class BulletDomain
             if (input.isSpacePressed)
             {
                 planeBultimer = planeBulInterval;
-                if (plane.bulletType == (int)Ally.playerTwoBul)
+                if (plane.bulType == (int)Ally.playerTwoBul)
                 {
                     BulletEntity newBullet = Factory.CreatePlayerBullet2(plane.pos, BulletCount, new(0, -1), scale);
                     Bullets[BulletCount] = newBullet;
                 }
-                if (plane.bulletType ==(int)Ally.playerThreeBulles)
+                if (plane.bulType ==(int)Ally.playerThreeBulles)
                 {
                     BulletEntity newBullet = Factory.CreatePlayerBullet3(plane.pos, BulletCount, new(0, -1), scale);
                     Bullets[BulletCount] = newBullet;
@@ -85,7 +85,7 @@ public static class BulletDomain
         for (int i = 0; i < BulletCount; i++)
         {
             ref var bul = ref Bullets[i];
-            if (bul.ally ==(int)Ally.playerTwoBul)
+            if (bul.typeID ==(int)Ally.playerTwoBul)
             {
 
                 bul.PlayerBulMove2(dt);
@@ -108,7 +108,7 @@ public static class BulletDomain
                     }
                 }
             }
-            if (bul.ally ==(int)Ally.playerThreeBulles)
+            if (bul.typeID ==(int)Ally.playerThreeBulles)
             {
                 bul.PlayerBulMove3(dt);
                 // 找子弹的最近敌人
@@ -130,7 +130,7 @@ public static class BulletDomain
                     }
                 }
             }
-            if (bul.ally == (int)Ally.fEnemyBul)
+            if (bul.typeID == (int)Ally.fEnemyBul)
             {
                 // 飞行敌人 子弹移动
                 // 从上垂直向下
@@ -140,7 +140,7 @@ public static class BulletDomain
                 {
                     bul.isDead = true;
                     plane.hp -= 10;
-                    plane.bulletType = 1;
+                    plane.bulType = 1;
                     if (plane.hp <= 0)
                     {
                         plane.isDead = true;
@@ -149,14 +149,14 @@ public static class BulletDomain
             }
 
             // 固定敌人 子弹移动
-            if (bul.ally ==(int)Ally.sEnemyBul)
+            if (bul.typeID ==(int)Ally.sEnemyBul)
             {
                 bul.SEnemyBulMove(bul.firstDir, dt);
                 if (IntersectUtil.IsCircleIntersect(plane, bul))
                 {
                     bul.isDead = true;
                     plane.hp -= 10;
-                    plane.bulletType = 1;
+                    plane.bulType = 1;
                     if (plane.hp <= 0)
                     {
                         plane.isDead = true;

@@ -8,6 +8,7 @@ public static class FoodController
         ref PlaneEntity plane = ref con.plane;
         ref FoodEntity[] food = ref con.food;
         ref int foodCount = ref con.foodCount;
+        ref RandomService r= ref con.randomService;
 
         // 生成加血食物 
         ref float hpFoodInterval = ref con.hpFoodInterval;
@@ -16,7 +17,7 @@ public static class FoodController
         if (hpFoodtimer <= 0)
         {
             hpFoodtimer = hpFoodInterval;
-            Vector2 rectPos = RandomHelper.GetRandomPosOn_HalfBottom(scale);
+            Vector2 rectPos = r.GetRandomPosOn_HalfBottom(scale);
             FoodEntity newHpFood = Factory.CreateFood(new Rectangle(rectPos.X, rectPos.Y, 20, 20),Color.RED, 2);
             food[foodCount] = newHpFood;
             foodCount++;
@@ -28,7 +29,7 @@ public static class FoodController
         bulFoodTimer -=dt;
         if(bulFoodTimer<=0){
             bulFoodTimer=bulFoodInterval;
-            Vector2 rectPos =RandomHelper.GetRandomPosOn_HalfBottom(scale);
+            Vector2 rectPos =r.GetRandomPosOn_HalfBottom(scale);
             FoodEntity newBulFood =Factory.CreateFood(new Rectangle(rectPos.X,rectPos.Y,20,20),Color.BROWN,1);
             food[foodCount]=newBulFood;
             foodCount ++;
@@ -53,7 +54,7 @@ public static class FoodController
             if(fo.ally==(int)Ally.bulFood){
               if(IntersectUtil.IsRectangleIntersect(fo.rect,plane)){
                 fo.isDead=true;
-                plane.bulletType=2;
+                plane.bulType=2;
               }   
             }
 

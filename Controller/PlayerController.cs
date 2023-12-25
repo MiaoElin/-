@@ -18,14 +18,11 @@ public static class PlayerController
     public static void DrawAll(ref Context con, float scale)
     {
         ref PlaneEntity plane = ref con.plane;
-        ref AssetsHelper asset = ref con.asset;
+        ref AssetsContext asset = ref con.assetsContext;
         if (!plane.isDead)
         {
             // 画飞机
-            Rectangle src = new Rectangle(0, 0, scale*32/6, scale*32/6);
-            Rectangle dest = new Rectangle(plane.pos.X, plane.pos.Y, 60,60);
-            Vector2 center = new Vector2(60/2,60/2);
-            Raylib.DrawTexturePro(asset.player, src, dest, center, 0, Color.WHITE);
+            plane.Draw(asset, scale);
 
             //画guiHP
             int planeHpInScreen = plane.hp * 2;

@@ -13,6 +13,7 @@ public class Program
         con.Initialize(scale);
         // 从文件加载图片
         // Texture2D plane = Raylib.LoadTexture("Assets/plane.png");
+        ref AssetsContext asset = ref con.assetsContext;
 
         // 循环体 游戏界面
         while (!Raylib.WindowShouldClose())
@@ -36,9 +37,9 @@ public class Program
             if (con.gameStatus == 1)
             {
                 Raylib.ClearBackground(Color.LIGHTGRAY);
-                // Vector2 planePos = new Vector2(55 * scale, 175 * scale);
-                // Raylib.DrawTexture(player, (int)(scale*planePos.X/6), (int)(scale*planePos.Y/6), Color.WHITE);
-                
+                Rectangle src = new Rectangle(0, 0, asset.map.Width, asset.map.Height);
+                Rectangle dest = new Rectangle(0, 0, scale * 720 / 6, scale * 1080 / 6);
+                Raylib.DrawTexturePro(asset.map, src, dest, Vector2.Zero, 0, Color.WHITE);
                 Game_Tick(ref con, dt, scale);
             }
             // 结束页
@@ -67,7 +68,7 @@ public class Program
             Raylib.EndDrawing();
         }
         Raylib.CloseWindow();
-        con.asset.UnloadTexture();
+        con.assetsContext.UnloadTexture();
 
 
     }
@@ -99,7 +100,7 @@ public class Program
         // 子弹 绘制
         BulletController.DrawAll(ref con,scale);
         // 敌人 绘制
-        EnemyController.DrawAll(ref con);
+        EnemyController.DrawAll(ref con,scale);
         // 食物绘制
         FoodController.Draw(ref con);
     }

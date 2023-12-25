@@ -36,14 +36,15 @@ public struct Context
     public LoginPanel loginPanel;
     public LogoutPanel logoutPanel;
     public GUIHP guiHP;
-    public AssetsHelper asset;
+    public RandomService randomService;
+    public AssetsContext assetsContext;
 
 
     public void Initialize(float scale)
     {
         input = new InputEntity();
-        asset =new AssetsHelper();
-        plane = Factory.CreatePlane(new Vector2(scale*360/6, scale*1000/6), Color.BLUE, scale*30/6, 300, 100, 0);
+        assetsContext =new AssetsContext();
+        plane = Factory.CreatePlane(1,new Vector2(scale*360/6, scale*1000/6), Color.BLUE, scale*30/6, 300, 100, 0);
 
         Enemies = new PlaneEntity[20000];
         EnemyCount = 0;
@@ -73,6 +74,7 @@ public struct Context
 
         width = 320;
         heigth = 180;//360 1080
+        randomService =new RandomService();
 
         loginPanel.startBtn = new GUIButton(new(scale * 310 / 6, scale * 440 / 6), new(scale * 100 / 6, scale * 30 / 6), "START GAME", Color.BLACK, Color.WHITE);
         loginPanel.exitBtn = new GUIButton(new(scale * 310 / 6, scale * 640 / 6), new(scale * 100 / 6, scale * 30 / 6), " EXIT GAME", Color.BLACK, Color.WHITE);
