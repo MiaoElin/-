@@ -102,7 +102,7 @@ public class Program
         // 敌人 绘制
         EnemyController.DrawAll(ref con,scale);
         // 食物绘制
-        FoodController.Draw(ref con);
+        FoodController.Draw(ref con,scale);
     }
     // 结束页
     static void Logout_Tick(ref Context con, float scale)

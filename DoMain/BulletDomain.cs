@@ -17,8 +17,8 @@ public static class BulletDomain
 
         // =====生成======
         // 我机子弹 生成
-        ref float planeBultimer = ref con.planeBultimer;
-        ref float planeBulInterval = ref con.planeBulInterval;
+        ref float planeBultimer = ref con.spawnTimer.planeBultimer;
+        ref float planeBulInterval = ref con.spawnTimer.planeBulInterval;
         planeBultimer -= dt;
         if (planeBultimer <= 0)
         {
@@ -41,8 +41,8 @@ public static class BulletDomain
             }
         }
         // 每个飞行敌人每2s秒生成一颗子弹
-        ref float fEBultimer = ref con.fEBulTimer;
-        ref float fEBulInterval = ref con.fEBulInterval;
+        ref float fEBultimer = ref con.spawnTimer.fEBulTimer;
+        ref float fEBulInterval = ref con.spawnTimer.fEBulInterval;
         fEBultimer -= dt;
         if (fEBultimer <= 0)
         {
@@ -56,8 +56,8 @@ public static class BulletDomain
             }
         }
         // 每个固定敌人 每3s 生成一个子弹
-        ref float sEBulTimer = ref con.sEBulTimer;
-        ref float sEBulInterval = ref con.sEBulInterval;
+        ref float sEBulTimer = ref con.spawnTimer.sEBulTimer;
+        ref float sEBulInterval = ref con.spawnTimer.sEBulInterval;
         sEBulTimer -= dt;
         if (sEBulTimer <= 0)
         {

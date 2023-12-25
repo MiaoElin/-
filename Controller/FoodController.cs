@@ -11,8 +11,8 @@ public static class FoodController
         ref RandomService r= ref con.randomService;
 
         // 生成加血食物 
-        ref float hpFoodInterval = ref con.hpFoodInterval;
-        ref float hpFoodtimer = ref con.hpFoodTimer;
+        ref float hpFoodInterval = ref con.spawnTimer.hpFoodInterval;
+        ref float hpFoodtimer = ref con.spawnTimer.hpFoodTimer;
         hpFoodtimer -= dt;
         if (hpFoodtimer <= 0)
         {
@@ -24,8 +24,8 @@ public static class FoodController
         }
 
         // 生成3子弹食物
-        ref float bulFoodInterval= ref con.bulFoodInterval;
-        ref float bulFoodTimer=ref con.bulFoodTimer;
+        ref float bulFoodInterval= ref con.spawnTimer.bulFoodInterval;
+        ref float bulFoodTimer=ref con.spawnTimer.bulFoodTimer;
         bulFoodTimer -=dt;
         if(bulFoodTimer<=0){
             bulFoodTimer=bulFoodInterval;
@@ -69,14 +69,22 @@ public static class FoodController
             }
         }
     }
-    public static void Draw(ref Context con)
+    public static void Draw(ref Context con,float scale)
     {
         ref FoodEntity[] food = ref con.food;
         ref int foodCount = ref con.foodCount;
+        ref AssetsContext asset=ref con.assetsContext;
         for (int i = 0; i < foodCount; i++)
         {
             var fo = food[i];
-            fo.Draw();
+            if (fo.ally == (int)Ally.bulFood)
+            {
+                fo.bulFoodDraw(asset, scale);
+            }
+            if (fo.ally == (int)Ally.hpFood)
+            {
+                fo.hpFoodDraw(asset, scale);
+            }
         }
     }
 }

@@ -3,7 +3,7 @@ using Raylib_cs;
 
 public static class EnemyController
 {
-    enum Ally { X, player,none, fEnemy, sEnemy }
+    enum Ally { X, player,fEnemy, sEnemy }
     public static void LogicTick(ref Context con, float dt,float scale)
     {
         EnemyDomain.Spawn(ref con,dt,scale);
@@ -19,14 +19,8 @@ public static class EnemyController
         // 敌人 绘制
         for (int i = 0; i < EnemyCount; i++)
         {  
-            Console.WriteLine ("llllll");
             var enemy = Enemies[i];
-            if (enemy.bulType ==(int)Ally.fEnemy)
-            {
-                enemy.fEnemyDraw(asset, scale);
-            }if(enemy.bulType==(int)Ally.sEnemy){
-                enemy.sEnemyDraw(asset,scale);
-            }
+            enemy.Draw(asset,scale,enemy.typeID);
 
         }
 
