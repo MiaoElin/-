@@ -3,42 +3,46 @@ using Raylib_cs;
 
 public static class Factory
 {
-    // public static PlaneEntity CreatePlane(AssetsContext assetsContext, IDService iDService, int typeID, Vector2 pos, float moveSpeed, int hp, int bulType)
-    // {
-    //     for (int i = 0; i < assetsContext.planeTM.Length - 1; i++)
-    //     {
-    //         var tm = assetsContext.planeTM[i];
-    //         if (tm.typeID == typeID)
-    //         {
-    //             PlaneEntity p = new PlaneEntity();
-    //             p.typeID = tm.typeID;
-    //             p.color = tm.color;
-    //             p.radius = tm.radius;
-    //             p.id = iDService.planeIDService++;
-    //             p.pos = pos;
-    //             p.moveSpeed = moveSpeed;
-    //             p.isDead = false;
-    //             p.hp = hp;
-    //             p.bulType = bulType;
-    //             return p;
-    //         }
-    //     }
-    //     return default;
-    // }
-    public static PlaneEntity CreatePlane(int typeID, int bulType, Vector2 pos, Color color, float radius, float moveSpeed, int hp, int id)
+    public static bool CreatePlane(AssetsContext assetsContext, IDService iDService, int typeID, Vector2 pos, float moveSpeed, int hp, int bulType,out PlaneEntity plane)
     {
-        PlaneEntity plane;
-        plane.color = color;
-        plane.pos = pos;
-        plane.radius = radius;
-        plane.moveSpeed = moveSpeed;
-        plane.hp = hp;
-        plane.isDead = false;
-        plane.id = id;
-        plane.bulType = bulType;
-        plane.typeID=typeID;
-        return plane;
+        for (int i = 0; i < assetsContext.planeTM.Length; i++)
+        {
+            var tm = assetsContext.planeTM[i];
+            if (tm.typeID == typeID)
+            {
+                PlaneEntity p = new PlaneEntity();
+                p.typeID = tm.typeID;
+                p.color = tm.color;
+                p.radius = tm.radius;
+                p.id = iDService.planeIDService++;
+                p.pos = pos;
+                p.moveSpeed = moveSpeed;
+                p.isDead = false;
+                p.hp = hp;
+                p.bulType = bulType;
+                plane=p;
+                return true;
+            }
+        }
+        plane=default;
+        return false;
     }
+    // public static bool CreateBullet(AssetsContext assetsContext,IDService iDService, int typeID,)
+    
+    // public static PlaneEntity CreatePlane(int typeID, int bulType, Vector2 pos, Color color, float radius, float moveSpeed, int hp, int id)
+    // {
+    //     PlaneEntity plane;
+    //     plane.color = color;
+    //     plane.pos = pos;
+    //     plane.radius = radius;
+    //     plane.moveSpeed = moveSpeed;
+    //     plane.hp = hp;
+    //     plane.isDead = false;
+    //     plane.id = id;
+    //     plane.bulType = bulType;
+    //     plane.typeID=typeID;
+    //     return plane;
+    // }
 
     public static BulletEntity CreatePlayerBullet2(Vector2 planePos, int id, Vector2 firstDir, float scale)
     {

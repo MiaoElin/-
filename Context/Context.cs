@@ -35,8 +35,11 @@ public struct Context
     {
         input = new InputEntity();
         assetsContext =new AssetsContext(scale);
-        plane = Factory.CreatePlane(1,1,new Vector2(scale*360/6, scale*1000/6), Color.BLUE, scale*30/6, 300, 100, 0);
-
+        // plane = Factory.CreatePlane(1,1,new Vector2(scale*360/6, scale*1000/6), Color.BLUE, scale*30/6, 300, 100, 0);
+         bool hasPlane = Factory.CreatePlane(assetsContext,iDService,1,new Vector2(scale*360/6, scale*1000/6),300,100,1,out PlaneEntity p);
+        if(hasPlane){
+            plane=p;
+        }
         Enemies = new PlaneEntity[20000];
         EnemyCount = 0;
         Bullets = new BulletEntity[2000000];

@@ -10,6 +10,8 @@ public static class EnemyDomain
         ref PlaneEntity[] Enemies = ref con.Enemies;
         ref int EnemyCount = ref con.EnemyCount;
         ref RandomService r=ref con.randomService;
+        ref AssetsContext assetsContext= ref con.assetsContext;
+        ref IDService iDService=ref con.iDService;
 
         // 飞行敌人 生成；
         ref float fEnemySqwantimer = ref con.spawnTimer.fEnemySpawntimer;
@@ -18,9 +20,15 @@ public static class EnemyDomain
         if (fEnemySqwantimer <= 0)
         {
             fEnemySqwantimer = fEnemySqwanInterval;
-            PlaneEntity newFlyEnemy = Factory.CreatePlane(2,3,r.GetRandomPosOnTop(scale), Color.GRAY, scale*20/6, 60, 20, EnemyCount);
+            // PlaneEntity newFlyEnemy = Factory.CreatePlane(2,3,r.GetRandomPosOnTop(scale), Color.GRAY, scale*20/6, 60, 20, EnemyCount);
+            bool hasPlane =Factory.CreatePlane(assetsContext,iDService,2,r.GetRandomPosOnTop(scale),60,20,3,out PlaneEntity newFlyEnemy);
+            if(hasPlane){
             Enemies[EnemyCount] = newFlyEnemy;
             EnemyCount++;
+            }else{
+               System.Console.WriteLine("default"); 
+            }
+
         }
 
         // 固定敌人 生成;
@@ -30,7 +38,8 @@ public static class EnemyDomain
         if (sEnemySqwantimer <= 0)
         {
             sEnemySqwantimer = sEnemySqwanInterval;
-            PlaneEntity newStayEnemy = Factory.CreatePlane(3,4,r.GetRandomPosOn_HalfTop(scale), Color.DARKGREEN, scale*30/6, 0, 20, EnemyCount);
+            // PlaneEntity newStayEnemy = Factory.CreatePlane(3,4,r.GetRandomPosOn_HalfTop(scale), Color.DARKGREEN, scale*30/6, 0, 20, EnemyCount);
+            bool hasPlane = Factory.CreatePlane(assetsContext,iDService,3,r.GetRandomPosOn_HalfTop(scale),0,20,4,out PlaneEntity newStayEnemy);
             Enemies[EnemyCount] = newStayEnemy;
             EnemyCount++;
         }

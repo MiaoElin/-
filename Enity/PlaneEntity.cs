@@ -19,25 +19,19 @@ public struct PlaneEntity
 
     public void Draw(AssetsContext asset, float scale, int typeID)
     {
+        Rectangle src = new Rectangle(0, 0, 32, 32);
+        Rectangle dest = new Rectangle(pos.X, pos.Y, scale * 80 / 6, scale * 80 / 6);
+        Vector2 center = new Vector2(scale * 80 / 6 / 2, scale * 80 / 6 / 2);
         if (typeID == 1)
         {
-            Rectangle src = new Rectangle(0, 0, 32, 32);
-            Rectangle dest = new Rectangle(pos.X, pos.Y, scale * 80 / 6, scale * 80 / 6);
-            Vector2 center = new Vector2(scale * 80 / 6 / 2, scale * 80 / 6 / 2);
             Raylib.DrawTexturePro(asset.player, src, dest, center, 0, Color.WHITE);
         }
         if (typeID == 2)
         {
-            Rectangle src = new Rectangle(0, 0, 32, 32);
-            Rectangle dest = new Rectangle(pos.X, pos.Y, scale * 80 / 6, scale * 80 / 6);
-            Vector2 center = new Vector2(scale * 80 / 6 / 2, scale * 80 / 6 / 2);
             Raylib.DrawTexturePro(asset.fenemy, src, dest, center, 0, Color.WHITE);
         }
         if (typeID == 3)
         {
-            Rectangle src = new Rectangle(0, 0, 32, 32);
-            Rectangle dest = new Rectangle(pos.X, pos.Y, scale * 80 / 6, scale * 80 / 6);
-            Vector2 center = new Vector2(scale * 80 / 6 / 2, scale * 80 / 6 / 2);
             Raylib.DrawTexturePro(asset.senemy, src, dest, center, 0, Color.WHITE);
         }
 
