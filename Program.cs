@@ -6,7 +6,7 @@ public class Program
     {
         float scale = 6;
         Raylib.InitWindow((int)scale * 120, (int)scale * 180, "PLANE GAME");
-        Raylib.SetTargetFPS(60);
+        Raylib.SetTargetFPS(1200);
 
         // 初始化
         Context con = new Context();
@@ -65,6 +65,7 @@ public class Program
             {
                 Logout_Draw(ref con, scale);
             }
+            Raylib.DrawFPS(0,0);
             Raylib.EndDrawing();
         }
         Raylib.CloseWindow();

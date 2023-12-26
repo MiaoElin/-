@@ -13,6 +13,7 @@ public struct AssetsContext
     public Texture2D senemy;
     public PlaneTM[] planeTMs;
     public FoodTM[] foodTMs;
+    public BulleTM[] bulleTMs;
 
     public AssetsContext(float scale)
     {
@@ -35,7 +36,7 @@ public struct AssetsContext
         p1.hp = 100;
         p1.bulType = 1;
         planeTMs[0] = p1;
-        
+
         PlaneTM p2 = new PlaneTM();
         p2.typeID = 2;
         p2.color = Color.GRAY;
@@ -53,17 +54,52 @@ public struct AssetsContext
         p3.hp = 20;
         p3.bulType = 4;
         planeTMs[2] = p3;
-        // 食物 模版
-        foodTMs =new FoodTM[2];
-        FoodTM f1=new FoodTM ();
-        f1.color=Color.BROWN;
-        f1.typeID=1;
-        foodTMs[0]=f1;
 
-        FoodTM f2=new FoodTM ();
-        f2.color=Color.RED;
-        f2.typeID=2;
-        foodTMs[1]=f2;
+        // 食物 模版
+        foodTMs = new FoodTM[2];
+        FoodTM f1 = new FoodTM();
+        f1.color = Color.BROWN;
+        f1.typeID = 1;
+        foodTMs[0] = f1;
+
+        FoodTM f2 = new FoodTM();
+        f2.color = Color.RED;
+        f2.typeID = 2;
+        foodTMs[1] = f2;
+
+        //子弹 模板
+        bulleTMs = new BulleTM[3];
+        
+        //玩家2子弹 3子弹模式用的是这个
+        BulleTM b1 = new BulleTM();
+        b1.texture2D= bullet;
+        b1.radius = scale * 5 / 6;
+        b1.moveSpeed = 800;
+        b1.typeID = 1;
+        b1.ppu=2;
+        bulleTMs[0] = b1;
+
+        // 飞行敌人用的这个
+        BulleTM b2 = new BulleTM();
+        b2.radius = scale * 5 / 6;
+        b2.moveSpeed = 300;
+        b2.texture2D=fenemybul;
+        b2.typeID = 2;
+        b2.ppu=2;
+        bulleTMs[1] = b2;
+
+        // 固定的敌人 用的这个
+        BulleTM b3 = new BulleTM();
+        b3.radius = scale * 7/ 6;
+        b3.moveSpeed = 200;
+        b3.texture2D=senemybul;
+        b3.typeID = 3;
+        b3.ppu=2;
+        bulleTMs[2] = b3;
+
+
+
+
 
     }
     public void UnloadTexture()

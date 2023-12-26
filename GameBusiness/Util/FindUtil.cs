@@ -22,40 +22,29 @@ public static class FindUtil
     //     }
     //     return nearlyEnemy;
     // }
-    public static PlaneEntity FindEnemy(BulletEntity bullets, PlaneEntity[] Enemies, int EnemyCount,out float nearDistance, out int nearEnemyIndex)
+    public static bool FindEnemy(BulletEntity bullets, PlaneEntity[] Enemies, int EnemyCount, out int nearEnemyIndex,out PlaneEntity nearEnemy)
     {
 
-        PlaneEntity nearEnemy = default;
-        nearDistance = float.MaxValue;
+        nearEnemy = default;
+        float nearDistance = float.MaxValue;
         nearEnemyIndex = -1;
         for (int j = 0; j < EnemyCount; j++)
         {
             var fly = Enemies[j];
-            float flyBulDisance1 = Vector2.Distance(bullets.pos1, Enemies[j].pos);
-            float flyBulDisance2 = Vector2.Distance(bullets.pos2, Enemies[j].pos);
-            float flyBulDisance3 =Vector2.Distance(bullets.pos2, Enemies[j].pos);
-            float flyBulDisance = 0;
+            float flyBulDisance= Vector2.Distance(bullets.pos, Enemies[j].pos);
             if(Enemies[j].isDead){
                 continue;
-            }
-            if (flyBulDisance1 <=flyBulDisance2&&flyBulDisance1<=flyBulDisance3)
-            {
-                flyBulDisance = flyBulDisance1;
-            }
-            if(flyBulDisance2<=flyBulDisance1&&flyBulDisance2<=flyBulDisance3){
-                flyBulDisance = flyBulDisance2;
-            }if(flyBulDisance3<=flyBulDisance1&&flyBulDisance3<=flyBulDisance2){
-                flyBulDisance =flyBulDisance3;
             }
             if (flyBulDisance < nearDistance)
             {
                 nearDistance = flyBulDisance;
                 nearEnemy = Enemies[j];
                 nearEnemyIndex = j;
+                return true;
             }else
             {
             }
         }
-        return nearEnemy;
+        return false;
     }
 }

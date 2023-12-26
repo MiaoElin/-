@@ -1,9 +1,9 @@
 {
   "files.exclude": {
     "obj": true,
-    "omnisharp.json": true,
-    "bin\\Debug\\net7.0": true,
     "bin\\Debug": true,
-    "bin": true
+    "bin": true,
+    "omnisharp(1).json": true,
+    "omnisharp.json": true
   }
 }
