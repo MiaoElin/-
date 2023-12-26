@@ -1,6 +1,6 @@
 using System.Numerics;
 using Raylib_cs;
-public struct SpawnTimer
+public struct SpawnEntity
 {
     public float fEnemySpawnInterval;
     public float fEnemySpawntimer;
@@ -18,7 +18,7 @@ public struct SpawnTimer
     public float hpFoodInterval;
     public float bulFoodTimer;
     public float bulFoodInterval;
-    public SpawnTimer()
+    public SpawnEntity()
     {
         fEnemySpawntimer = 1f;
         fEnemySpawnInterval = 4f;

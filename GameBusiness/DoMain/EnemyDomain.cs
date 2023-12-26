@@ -21,7 +21,7 @@ public static class EnemyDomain
         {
             fEnemySqwantimer = fEnemySqwanInterval;
             // PlaneEntity newFlyEnemy = Factory.CreatePlane(2,3,r.GetRandomPosOnTop(scale), Color.GRAY, scale*20/6, 60, 20, EnemyCount);
-            bool hasPlane =Factory.CreatePlane(assetsContext,iDService,2,r.GetRandomPosOnTop(scale),60,20,3,out PlaneEntity newFlyEnemy);
+            bool hasPlane =Factory.CreatePlane(2,assetsContext,iDService,r.GetRandomPosOnTop(scale),out PlaneEntity newFlyEnemy);
             if(hasPlane){
             Enemies[EnemyCount] = newFlyEnemy;
             EnemyCount++;
@@ -39,7 +39,7 @@ public static class EnemyDomain
         {
             sEnemySqwantimer = sEnemySqwanInterval;
             // PlaneEntity newStayEnemy = Factory.CreatePlane(3,4,r.GetRandomPosOn_HalfTop(scale), Color.DARKGREEN, scale*30/6, 0, 20, EnemyCount);
-            bool hasPlane = Factory.CreatePlane(assetsContext,iDService,3,r.GetRandomPosOn_HalfTop(scale),0,20,4,out PlaneEntity newStayEnemy);
+            bool hasPlane = Factory.CreatePlane(3,assetsContext,iDService,r.GetRandomPosOn_HalfTop(scale),out PlaneEntity newStayEnemy);
             Enemies[EnemyCount] = newStayEnemy;
             EnemyCount++;
         }

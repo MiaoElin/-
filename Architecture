@@ -5,6 +5,7 @@ Util
 Context
 Factory
 Entity/UI
-GUI
-Helper
+GUI、Service（可以存字段）
+Helper(一般不存字段)
+
 

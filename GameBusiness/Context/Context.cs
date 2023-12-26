@@ -27,7 +27,7 @@ public struct Context
     public GUIHP guiHP;
     public RandomService randomService;
     public AssetsContext assetsContext;
-    public SpawnTimer spawnTimer;
+    public SpawnEntity spawnTimer;
     public IDService iDService;
 
 
@@ -36,7 +36,7 @@ public struct Context
         input = new InputEntity();
         assetsContext =new AssetsContext(scale);
         // plane = Factory.CreatePlane(1,1,new Vector2(scale*360/6, scale*1000/6), Color.BLUE, scale*30/6, 300, 100, 0);
-         bool hasPlane = Factory.CreatePlane(assetsContext,iDService,1,new Vector2(scale*360/6, scale*1000/6),300,100,1,out PlaneEntity p);
+         bool hasPlane = Factory.CreatePlane(1,assetsContext,iDService,new Vector2(scale*360/6, scale*1000/6),out PlaneEntity p);
         if(hasPlane){
             plane=p;
         }
@@ -53,7 +53,7 @@ public struct Context
         width = 320;
         heigth = 180;//360 1080
         randomService =new RandomService();
-        spawnTimer =new SpawnTimer ();
+        spawnTimer =new SpawnEntity ();
         
 
         loginPanel.startBtn = new GUIButton(new(scale * 310 / 6, scale * 440 / 6), new(scale * 100 / 6, scale * 30 / 6), "START GAME", Color.BLACK, Color.WHITE);

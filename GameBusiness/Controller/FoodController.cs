@@ -9,6 +9,8 @@ public static class FoodController
         ref FoodEntity[] food = ref con.food;
         ref int foodCount = ref con.foodCount;
         ref RandomService r= ref con.randomService;
+        ref AssetsContext assetsContext=ref con.assetsContext;
+        ref IDService iDService=ref con.iDService;
 
         // 生成加血食物 
         ref float hpFoodInterval = ref con.spawnTimer.hpFoodInterval;
@@ -18,9 +20,13 @@ public static class FoodController
         {
             hpFoodtimer = hpFoodInterval;
             Vector2 rectPos = r.GetRandomPosOn_HalfBottom(scale);
-            FoodEntity newHpFood = Factory.CreateFood(new Rectangle(rectPos.X, rectPos.Y, 20, 20),Color.RED, 2);
+            bool hasHpFood = Factory.CreateFood(2,new Rectangle(rectPos.X, rectPos.Y, 20, 20),assetsContext,iDService,out FoodEntity newHpFood);
+            if(hasHpFood){
             food[foodCount] = newHpFood;
             foodCount++;
+            }else{
+                System.Console.WriteLine("没有2类型的食物模板");
+            }
         }
 
         // 生成3子弹食物
@@ -30,16 +36,21 @@ public static class FoodController
         if(bulFoodTimer<=0){
             bulFoodTimer=bulFoodInterval;
             Vector2 rectPos =r.GetRandomPosOn_HalfBottom(scale);
-            FoodEntity newBulFood =Factory.CreateFood(new Rectangle(rectPos.X,rectPos.Y,20,20),Color.BROWN,1);
+            bool hasBulFood =Factory.CreateFood(1,new Rectangle(rectPos.X,rectPos.Y,20,20),assetsContext,iDService,out FoodEntity newBulFood);
+            if(hasBulFood){
             food[foodCount]=newBulFood;
             foodCount ++;
+            }else{
+                System.Console.WriteLine("没有1类型的食物模板");
+            }
+
         }
 
         //如果我机吃了加血食物 则加20hp；如果hp>=100 则=100；
         for (int i = 0; i < foodCount; i++)
         {
             ref var fo = ref food[i];
-            if (fo.ally ==(int)Ally.hpFood)
+            if (fo.typeID ==(int)Ally.hpFood)
             {
                 if (IntersectUtil.IsRectangleIntersect(fo.rect, plane))
                 {
@@ -51,7 +62,7 @@ public static class FoodController
                     }
                 }
             }
-            if(fo.ally==(int)Ally.bulFood){
+            if(fo.typeID==(int)Ally.bulFood){
               if(IntersectUtil.IsRectangleIntersect(fo.rect,plane)){
                 fo.isDead=true;
                 plane.bulType=2;
@@ -77,11 +88,11 @@ public static class FoodController
         for (int i = 0; i < foodCount; i++)
         {
             var fo = food[i];
-            if (fo.ally == (int)Ally.bulFood)
+            if (fo.typeID == (int)Ally.bulFood)
             {
                 fo.bulFoodDraw(asset, scale);
             }
-            if (fo.ally == (int)Ally.hpFood)
+            if (fo.typeID == (int)Ally.hpFood)
             {
                 fo.hpFoodDraw(asset, scale);
             }

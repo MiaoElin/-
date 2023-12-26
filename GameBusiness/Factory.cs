@@ -3,11 +3,11 @@ using Raylib_cs;
 
 public static class Factory
 {
-    public static bool CreatePlane(AssetsContext assetsContext, IDService iDService, int typeID, Vector2 pos, float moveSpeed, int hp, int bulType,out PlaneEntity plane)
+    public static bool CreatePlane(int typeID, AssetsContext assetsContext, IDService iDService, Vector2 pos, out PlaneEntity plane)
     {
-        for (int i = 0; i < assetsContext.planeTM.Length; i++)
+        for (int i = 0; i < assetsContext.planeTMs.Length; i++)
         {
-            var tm = assetsContext.planeTM[i];
+            var tm = assetsContext.planeTMs[i];
             if (tm.typeID == typeID)
             {
                 PlaneEntity p = new PlaneEntity();
@@ -16,19 +16,20 @@ public static class Factory
                 p.radius = tm.radius;
                 p.id = iDService.planeIDService++;
                 p.pos = pos;
-                p.moveSpeed = moveSpeed;
+                p.moveSpeed = tm.moveSpeed;
+                p.bulType = tm.bulType;
+                p.hp = tm.hp;
                 p.isDead = false;
-                p.hp = hp;
-                p.bulType = bulType;
-                plane=p;
+                plane = p;
                 return true;
             }
         }
-        plane=default;
+        System.Console.WriteLine("找不到typeID为" + typeID);
+        plane = default;
         return false;
     }
     // public static bool CreateBullet(AssetsContext assetsContext,IDService iDService, int typeID,)
-    
+
     // public static PlaneEntity CreatePlane(int typeID, int bulType, Vector2 pos, Color color, float radius, float moveSpeed, int hp, int id)
     // {
     //     PlaneEntity plane;
@@ -104,13 +105,27 @@ public static class Factory
         bullet.typeID = 4;
         return bullet;
     }
-    public static FoodEntity CreateFood(Rectangle rect, Color color, sbyte ally)
+    public static bool CreateFood(int typeID, Rectangle rect, AssetsContext assetsContext, IDService iDService, out FoodEntity food)
     {
-        FoodEntity food;
-        food.color = color;
-        food.rect = rect;
-        food.isDead = false;
-        food.ally = ally;
-        return food;
+        for (int i = 0; i < assetsContext.foodTMs.Length; i++)
+        {
+            var tm = assetsContext.foodTMs[i];
+            if (tm.typeID == typeID)
+            {
+                FoodEntity f;
+                f.color = tm.color;
+                f.typeID = tm.typeID;
+                f.rect = rect;
+                f.isDead = false;
+                f.id=iDService.foodIDService++;
+                food = f;
+                return true;
+            }
+
+        }
+        System.Console.WriteLine("找不到typeID为:"+typeID);
+        food = default;
+        return false;
+
     }
 }

@@ -103,6 +103,8 @@ public class Program
         EnemyController.DrawAll(ref con,scale);
         // 食物绘制
         FoodController.Draw(ref con,scale);
+        // UI 绘制
+        GamestatusUI.Draw(ref con,scale);
     }
     // 结束页
     static void Logout_Tick(ref Context con, float scale)

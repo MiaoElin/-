@@ -101,7 +101,7 @@ public static class BulletDomain
                     {
                         bul.isDead = true;
                         Enemies[index].hp -= 10;
-                        if (Enemies[index].hp == 0)
+                        if (Enemies[index].hp <= 0)
                         {
                             Enemies[index].isDead = true;
                         }
@@ -123,7 +123,7 @@ public static class BulletDomain
                     {
                         bul.isDead = true;
                         Enemies[index].hp -= 10;
-                        if (Enemies[index].hp == 0)
+                        if (Enemies[index].hp <= 0)
                         {
                             Enemies[index].isDead = true;
                         }

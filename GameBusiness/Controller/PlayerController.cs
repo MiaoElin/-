@@ -23,11 +23,6 @@ public static class PlayerController
         {
             // 画飞机
             plane.Draw(asset, scale,plane.typeID);
-
-            //画guiHP
-            int planeHpInScreen = plane.hp * 2;
-            string text = "100/" + plane.hp.ToString();
-            con.guiHP.Draw(text, planeHpInScreen, scale);
         }
         else
         {

@@ -17,6 +17,7 @@ public static class IntersectUtil
     public static bool IsCircleIntersect(PlaneEntity plane,BulletEntity bullet){
         float distance1=Vector2.Distance(plane.pos,bullet.pos1);
         float distance2 =Vector2.Distance(plane.pos,bullet.pos2);
+        float distance3 =Vector2.Distance(plane.pos,bullet.pos3);
         if(distance1<=plane.radius+bullet.radius||distance2<=plane.radius+bullet.radius){
             return true;
         }else{
