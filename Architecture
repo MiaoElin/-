@@ -3,8 +3,9 @@ Controller
 Domain
 Util
 Context
+AssetsContext
 Factory
-Entity/UI
+Entity/UI/templat
 GUI、Service（可以存字段）
 Helper(一般不存字段)
 

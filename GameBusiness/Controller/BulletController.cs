@@ -5,7 +5,7 @@ public static class BulletController
 {
     
     public static void LogicTick(ref Context con, float dt, float scale)
-    {
+    {   
         BulletDomain.Spawn(ref con, dt, scale);
         BulletDomain.Move(ref con, dt);
         BulletDomain.Remove(ref con);
