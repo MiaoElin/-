@@ -20,7 +20,7 @@ public static class EnemyController
         for (int i = 0; i < EnemyCount; i++)
         {  
             var enemy = Enemies[i];
-            enemy.Draw(asset,scale,enemy.typeID);
+            enemy.Draw(scale);
 
         }
 

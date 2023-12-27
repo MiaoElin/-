@@ -22,7 +22,7 @@ public static class PlayerController
         if (!plane.isDead)
         {
             // 画飞机
-            plane.Draw(asset, scale,plane.typeID);
+            plane.Draw(scale);
         }
         else
         {

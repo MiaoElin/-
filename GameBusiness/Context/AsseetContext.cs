@@ -35,6 +35,7 @@ public struct AssetsContext
         p1.moveSpeed = 300;
         p1.hp = 100;
         p1.bulType = 1;
+        p1.texture2D=player;
         planeTMs[0] = p1;
 
         PlaneTM p2 = new PlaneTM();
@@ -44,6 +45,7 @@ public struct AssetsContext
         p2.moveSpeed = 60;
         p2.hp = 20;
         p2.bulType = 3;
+        p2.texture2D=fenemy;
         planeTMs[1] = p2;
 
         PlaneTM p3 = new PlaneTM();
@@ -53,6 +55,7 @@ public struct AssetsContext
         p3.moveSpeed = 0;
         p3.hp = 20;
         p3.bulType = 4;
+        p3.texture2D=senemy;
         planeTMs[2] = p3;
 
         // 食物 模版

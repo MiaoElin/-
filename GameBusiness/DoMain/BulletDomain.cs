@@ -25,7 +25,7 @@ public static class BulletDomain {
                 if (plane.bulType == (int)BulType.playerTwoBul) {
                     bool hasBullet1 = Factory.CreateBullet(1, 1, plane.pos, new Vector2(0, -1), assetsContext, iDService, out BulletEntity newBul1);
                     if (hasBullet1) {
-                        newBul1.pos.X -= 3* newBul1.radius;
+                        newBul1.pos.X -= 3 * newBul1.radius;
                         Bullets[BulletCount] = newBul1;
                         BulletCount++;
                     }
@@ -67,18 +67,21 @@ public static class BulletDomain {
             for (int i = 0; i < EnemyCount; i++) {
                 fEBultimer = fEBulInterval;
                 var enemy = Enemies[i];
-                bool hasBullet1 = Factory.CreateBullet(2, 2, enemy.pos, new(0, 1), assetsContext, iDService, out BulletEntity newBullet1);
-                if (hasBullet1) {
-                    newBullet1.pos.X -= 3f * newBullet1.radius;
-                    Bullets[BulletCount] = newBullet1;
-                    BulletCount++;
+                if (enemy.typeID == (int)PlaneType.fenemy) {
+                    bool hasBullet1 = Factory.CreateBullet(2, 2, enemy.pos, new(0, 1), assetsContext, iDService, out BulletEntity newBullet1);
+                    if (hasBullet1) {
+                        newBullet1.pos.X -= 3f * newBullet1.radius;
+                        Bullets[BulletCount] = newBullet1;
+                        BulletCount++;
+                    }
+                    bool hasBullet2 = Factory.CreateBullet(2, 2, enemy.pos, new(0, 1), assetsContext, iDService, out BulletEntity newBullet2);
+                    if (hasBullet2) {
+                        newBullet1.pos.X += 3f * newBullet1.radius;
+                        Bullets[BulletCount] = newBullet2;
+                        BulletCount++;
+                    }
                 }
-                bool hasBullet2 = Factory.CreateBullet(2, 2, enemy.pos, new(0, 1), assetsContext, iDService, out BulletEntity newBullet2);
-                if (hasBullet2) {
-                    newBullet1.pos.X += 3f * newBullet1.radius;
-                    Bullets[BulletCount] = newBullet2;
-                    BulletCount++;
-                }
+
             }
         }
         // 每个固定敌人 每3s 生成一个子弹
@@ -89,11 +92,13 @@ public static class BulletDomain {
             for (int i = 0; i < EnemyCount; i++) {
                 sEBulTimer = sEBulInterval;
                 var enemy = Enemies[i];
-                Vector2 firstDir = plane.pos - enemy.pos;
-                bool hasBullet = Factory.CreateBullet(3, 2, enemy.pos, firstDir, assetsContext, iDService, out BulletEntity newBullet);
-                if (hasBullet) {
-                    Bullets[BulletCount] = newBullet;
-                    BulletCount++;
+                if (enemy.typeID == (int)PlaneType.senemy) {
+                    Vector2 firstDir = plane.pos - enemy.pos;
+                    bool hasBullet = Factory.CreateBullet(3, 2, enemy.pos, firstDir, assetsContext, iDService, out BulletEntity newBullet);
+                    if (hasBullet) {
+                        Bullets[BulletCount] = newBullet;
+                        BulletCount++;
+                    }
                 }
             }
         }

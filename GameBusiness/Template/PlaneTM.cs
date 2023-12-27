@@ -8,4 +8,5 @@ public struct PlaneTM
     public float moveSpeed;
     public int hp;
     public int bulType; // 1=我机双弹 2=我机3弹 3=敌人双弹 4=敌人飞向我机单弹
+    public Texture2D texture2D;
 }

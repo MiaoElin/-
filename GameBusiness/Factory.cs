@@ -14,6 +14,7 @@ public static class Factory
                 p.typeID = tm.typeID;
                 p.color = tm.color;
                 p.radius = tm.radius;
+                p.texture2D =tm.texture2D;
                 p.id = iDService.planeIDService++;
                 p.pos = pos;
                 p.moveSpeed = tm.moveSpeed;
